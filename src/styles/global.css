@@ -1,8 +1,6 @@
 @import "./tokens.css";
 
-/* -------------------------------------------------
-   Base
--------------------------------------------------- */
+/* ------------ Base ------------ */
 * {
   box-sizing: border-box;
 }
@@ -21,14 +19,24 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Links */
 a {
   color: rgb(var(--accent));
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: rgba(var(--accent), 0.35);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s ease,
+    text-decoration-thickness 0.15s ease;
 }
 
 a:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  text-decoration-color: rgba(var(--accent), 0.55);
   text-decoration-thickness: 2px;
 }
 
@@ -38,14 +46,12 @@ a:focus-visible {
   border-radius: 8px;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+/* External links: dotted underline */
+a[href^="http"]:not([href*="ajknzhol.com"]) {
+  text-decoration-style: dotted;
 }
 
-/* -------------------------------------------------
-   Utilities
--------------------------------------------------- */
+/* Utilities */
 .muted {
   color: rgb(var(--muted));
 }
@@ -60,7 +66,7 @@ hr {
   margin: 32px 0;
 }
 
-/* Accessibility */
+/* Skip link */
 .skip-link {
   position: absolute;
   left: -999px;
@@ -75,50 +81,38 @@ hr {
   border-radius: 10px;
 }
 
-/* -------------------------------------------------
-   Minimal blog layout (Armin-style)
--------------------------------------------------- */
+/* ------------ Shell ------------ */
 .shell {
   max-width: 980px;
   margin: 0 auto;
   padding: 28px 20px 64px;
 }
 
-/* Header */
+/* Shared “center column” */
+.header-inner,
+.postlist,
+.footer {
+  max-width: var(--measure);
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ------------ Header ------------ */
 .topbar {
+  margin-bottom: 54px;
+}
+
+.header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  margin-bottom: 54px;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 260px;
-}
-
-.avatar {
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  object-fit: cover;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
 }
 
 .brand a {
-  color: rgb(var(--accent));
   font-weight: 700;
 }
 
-.brand span {
-  color: rgb(var(--text));
-  font-weight: 600;
-}
-
-/* Nav */
 .nav {
   display: flex;
   gap: 16px;
@@ -127,7 +121,6 @@ hr {
 }
 
 .nav a {
-  color: rgb(var(--accent));
   font-weight: 600;
 }
 
@@ -136,27 +129,10 @@ hr {
   text-decoration: none;
 }
 
-/* Header aligns with prose column */
-.header-inner {
-  max-width: 700px; /* same as .prose / .postlist */
-  margin: 0 auto;
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-}
-
-/* -------------------------------------------------
-   Posts list
--------------------------------------------------- */
+/* ------------ Posts list ------------ */
 .postlist {
-  max-width: 700px; /* reading column */
-  margin: 0 auto;
   padding: 0;
   list-style: none;
-
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -165,10 +141,8 @@ hr {
 .postrow {
   display: grid;
   grid-template-columns: 1fr auto;
-  column-gap: 28px;
-  row-gap: 6px;
+  gap: 6px 28px;
   align-items: baseline;
-
   padding: 14px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
@@ -190,7 +164,7 @@ hr {
   font-weight: 800;
   letter-spacing: -0.015em;
   line-height: 1.2;
-  transition: transform 0.12s ease, opacity 0.12s ease;
+  transition: transform 0.12s ease;
 }
 
 .postbody p {
@@ -210,45 +184,9 @@ hr {
   opacity: 0.7;
 }
 
-@media (max-width: 720px) {
-  .postrow {
-    grid-template-columns: 1fr;
-  }
-  .postdate {
-    order: -1;
-    text-align: left;
-  }
-}
-
-/* -------------------------------------------------
-   Responsive
--------------------------------------------------- */
-@media (max-width: 720px) {
-  .topbar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  .postrow {
-    grid-template-columns: 1fr;
-    row-gap: 6px;
-  }
-
-  .postdate {
-    text-align: left;
-    padding-top: 0;
-    opacity: 0.7;
-    font-size: 0.9rem;
-  }
-}
-
-/* -------------------------------------------------
-   Footer
--------------------------------------------------- */
+/* ------------ Footer ------------ */
 .footer {
-  max-width: 700px; /* same as .postlist */
-  margin: 48px auto 0;
+  margin-top: 48px;
   padding-top: 16px;
   border-top: 1px solid var(--border);
 }
@@ -257,4 +195,26 @@ hr {
   margin: 0;
   font-size: 0.9rem;
   color: rgb(var(--muted));
+}
+
+/* ------------ Responsive ------------ */
+@media (max-width: 720px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .nav {
+    justify-content: flex-start;
+  }
+
+  .postrow {
+    grid-template-columns: 1fr;
+  }
+  .postdate {
+    order: -1;
+    text-align: left;
+    opacity: 0.7;
+    font-size: 0.9rem;
+  }
 }

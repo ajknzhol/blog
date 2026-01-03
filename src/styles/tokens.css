@@ -4,7 +4,7 @@
   --border: rgba(0, 0, 0, 0.1);
   --text: 23, 23, 23;
   --muted: 102, 102, 102;
-  --accent: 30, 64, 175;
+  --accent: 41, 53, 85;
   --radius: 14px;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   --max: 72ch;
@@ -13,4 +13,5 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
   --lh: 1.75;
+  --measure: 700px;
 }

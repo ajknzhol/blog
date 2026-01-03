@@ -1,33 +1,33 @@
 ---
 import { SITE } from "../consts";
 
-const nav = [
-  { href: "/", label: "Home" },
-  { href: "/blog", label: "Blog" },
-  { href: "/about", label: "About" },
-];
+export type NavItem = { href: string; label: string };
+
+type Props = {
+  nav?: NavItem[];
+  currentPath?: string;
+};
+
+const {
+  nav = [{ href: "/about", label: "About" }],
+  currentPath = Astro.url.pathname,
+} = Astro.props as Props;
 ---
 
-<header class="container" style="padding: var(--pad) 0 0;">
-  <a class="skip-link" href="#content">Skip to content</a>
+<header class="topbar">
+  <div class="header-inner">
+    <div class="brand">
+      <div>
+        <a href="/">{SITE.title}</a>
+      </div>
+    </div>
 
-  <div
-    class="card"
-    style="padding: 14px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px;"
-  >
-    <a
-      href="/"
-      style="font-weight: 800; letter-spacing: .2px; color: var(--text); text-decoration:none;"
-    >
-      {SITE.title}
-    </a>
-
-    <nav style="display:flex; gap:14px; flex-wrap:wrap;">
+    <nav class="nav" aria-label="Primary">
       {
         nav.map((i) => (
           <a
             href={i.href}
-            style="color: var(--text); opacity: .85; text-decoration:none;"
+            aria-current={currentPath === i.href ? "page" : undefined}
           >
             {i.label}
           </a>

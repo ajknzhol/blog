@@ -1,66 +1,39 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
 import Prose from "../components/Prose.astro";
 import { SITE } from "../consts";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE.title} description={SITE.description} />
-  </head>
+<SiteLayout title={`About • ${SITE.title}`} description={SITE.description}>
+  <Prose>
+    <h1>About</h1>
 
-  <body>
-    <div class="shell">
-      <header class="topbar">
-        <div class="header-inner">
-          <div class="brand">
-            <div>
-              <a href="/">{SITE.title}</a>
-            </div>
-          </div>
+    <p class="muted" style="margin-top:-0.25rem; margin-bottom: 1.25rem;">
+      A short page about me and what I write here.
+    </p>
 
-          <nav class="nav" aria-label="Primary">
-            <a href="/about">about</a>
-          </nav>
-        </div>
-      </header>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo
+      integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu
+      turpis egestas pretium.
+    </p>
 
-      <main>
-        <Prose>
-          <h1>About</h1>
-          <p class="muted" style="margin-top:-0.25rem; margin-bottom: 1.25rem;">
-            A short page about me and what I write here.
-          </p>
+    <p>
+      Morbi tristique senectus et netus. Id semper risus in hendrerit gravida
+      rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis
+      purus sit amet. Tellus molestie nunc non blandit massa.
+    </p>
 
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae
-            ultricies leo integer malesuada nunc vel risus commodo viverra.
-            Adipiscing enim eu turpis egestas pretium.
-          </p>
+    <p>
+      Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque.
+      Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac
+      felis donec.
+    </p>
 
-          <p>
-            Morbi tristique senectus et netus. Id semper risus in hendrerit
-            gravida rutrum quisque non tellus. Habitasse platea dictumst quisque
-            sagittis purus sit amet. Tellus molestie nunc non blandit massa.
-          </p>
-
-          <p>
-            Mollis nunc sed id semper risus in. Convallis a cras semper auctor
-            neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu
-            consequat ac felis donec.
-          </p>
-
-          <p>
-            Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi
-            tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit.
-          </p>
-        </Prose>
-      </main>
-
-      <Footer />
-    </div>
-  </body>
-</html>
+    <p>
+      Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus
+      imperdiet. Id porta nibh venenatis cras sed felis eget velit.
+    </p>
+  </Prose>
+</SiteLayout>

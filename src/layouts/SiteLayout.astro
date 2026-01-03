@@ -1,0 +1,47 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE } from "../consts";
+import type { NavItem } from "../components/Header.astro";
+
+type Props = {
+  title?: string;
+  description?: string;
+  nav?: NavItem[];
+  type?: "website" | "article";
+  image?: string;
+};
+
+const {
+  title = SITE.title,
+  description = SITE.description,
+  nav,
+  type = "website",
+  image,
+} = Astro.props as Props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      type={type}
+      image={image}
+    />
+  </head>
+
+  <body>
+    <div class="shell">
+      <Header nav={nav} />
+
+      <main>
+        <slot />
+      </main>
+
+      <Footer />
+    </div>
+  </body>
+</html>

@@ -1,58 +1,28 @@
 ---
 import { getCollection } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
 import { SITE } from "../consts";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
-
-const nav = [{ href: "/about", label: "about" }];
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE.title} description={SITE.description} />
-  </head>
-
-  <body>
-    <div class="shell">
-      <header class="topbar">
-        <div class="header-inner">
-          <div class="brand">
-            <div>
-              <a href="/">{SITE.title}</a>
-            </div>
+<SiteLayout title={SITE.title} description={SITE.description}>
+  <ul class="postlist">
+    {
+      posts.map((post) => (
+        <li class="postrow">
+          <div class="postbody">
+            <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+            <p>{post.data.description ?? "—"}</p>
           </div>
-
-          <nav class="nav" aria-label="Primary">
-            {nav.map((i) => <a href={i.href}>{i.label}</a>)}
-          </nav>
-        </div>
-      </header>
-
-      <main>
-        <ul class="postlist">
-          {
-            posts.map((post) => (
-              <li class="postrow">
-                <div class="postbody">
-                  <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-                  <p>{post.data.description ?? "—"}</p>
-                </div>
-                <div class="postdate">
-                  <FormattedDate date={post.data.pubDate} />
-                </div>
-              </li>
-            ))
-          }
-        </ul>
-      </main>
-
-      <Footer />
-    </div>
-  </body>
-</html>
+          <div class="postdate">
+            <FormattedDate date={post.data.pubDate} />
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</SiteLayout>
